@@ -10,34 +10,34 @@ import java.util.List;
 @Service
 public class TaskService {
 
-    private TaskRepository taskRepository;
+    private TaskRepository theTaskRepository;
 
     public TaskService() {
     }
 
     @Autowired
     public TaskService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+        this.theTaskRepository = taskRepository;
     }
 
     List<Task> findAll(){
-        return taskRepository.findAll();
+        return theTaskRepository.findAll();
     }
 
     List<Task> findByStatus(String status){
-        return taskRepository.findByStatus(status);
+        return theTaskRepository.findByStatus(status);
     }
 
     void save(Task task){
-        taskRepository.save(task);
+        theTaskRepository.save(task);
     }
 
     void deleteById(int id){
-        taskRepository.deleteById(id);
+        theTaskRepository.deleteById(id);
     }
 
     void update(Task task){
-        taskRepository.save(task);
+        theTaskRepository.save(task);
     }
 
 }
