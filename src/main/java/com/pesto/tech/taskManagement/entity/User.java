@@ -2,18 +2,47 @@ package com.pesto.tech.taskManagement.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+
 @Entity
-@Table(name = "user")
+@Table(name = "USER")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    int id;
+    private int id;
 
-    String userName;
+    @Column(name = "username")
+    private String userName;
 
-    String password;
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "enabled")
+    private byte enabled;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Collection<Role> roles;
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
+    public byte getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(byte enabled) {
+        this.enabled = enabled;
+    }
 
     public String getPassword() {
         return password;
